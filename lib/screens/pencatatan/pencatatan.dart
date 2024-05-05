@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup/widgets/card_widget.dart';
+import 'package:login_signup/screens/pencatatan/pembibitan/pembibitan.dart';
+import 'package:login_signup/screens/pencatatan/perawatan/perawatan.dart';
+import 'package:login_signup/screens/pencatatan/panen/panen.dart';
+
 
 class PencatatanPage extends StatefulWidget {
   @override
@@ -21,35 +25,63 @@ class _PencatatanPageState extends State<PencatatanPage> {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 0), 
-            CardWidget(
-              title: 'Pencatatan',
-              icon: Icons.note_add_outlined,
-              color: Colors.orange,
-            ),
-            SizedBox(height: 5),
-            CardWidget(
-              title: 'Perawatan',
-              icon: Icons.water_drop_outlined,
-              color: Colors.green,
-            ),
-            SizedBox(height: 5),
-            CardWidget(
-              key: UniqueKey(), 
-              title: 'Panen',
-              icon: Icons.coffee_maker,
-              color: Colors.blue,
-            ),
-          ],
+      body: Padding(
+        padding: EdgeInsets.all(5),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PembibitanPage()),
+                  );
+                },
+                child: SizedBox(
+                  width: 350,
+                  height: 130,
+                  child: CardWidget(
+                    image: AssetImage('assets/images/pembibitan.png'),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PerawatanPage()),
+                  );
+                },
+                child: SizedBox(
+                  width: 350,
+                  height: 130,
+                  child: CardWidget(
+                    image: AssetImage('assets/images/perawatan.png'),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PanenPage()),
+                  );
+                },
+                child: SizedBox(
+                  width: 350,
+                  height: 130,
+                  child: CardWidget(
+                    image: AssetImage('assets/images/panen.png'),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-
-  

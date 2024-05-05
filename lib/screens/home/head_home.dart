@@ -13,7 +13,7 @@ class HeadHome extends StatelessWidget {
         const Text(
           "Selamat Datang\nNur Muhammad Fadli",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
