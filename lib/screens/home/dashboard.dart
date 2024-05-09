@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_signup/screens/home/head_home.dart';
+import 'package:login_signup/screens/home/menu/harga_kopi.dart';
+import 'package:login_signup/widgets/cards_widget.dart';
 import 'package:login_signup/widgets/custom_button.dart';
 import 'package:login_signup/widgets/card_widget.dart';
 import 'package:login_signup/models/article.dart'; 
-import 'package:login_signup/widgets/article_card.dart'; 
+import 'package:login_signup/screens/home/menu/cuaca.dart';
+import 'package:login_signup/screens/home/menu/penjadwalan.dart';
+import 'package:login_signup/screens/home/menu/report.dart';
+import 'package:login_signup/screens/home/menu/notifikasi.dart';
+import 'package:login_signup/widgets/article_card.dart';
+import 'package:url_launcher/url_launcher.dart'; 
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -60,9 +67,12 @@ class _DashboardPageState extends State<DashboardPage> {
                     CustomButton(
                       key: UniqueKey(),
                       icon: Icons.book_online,
-                      text: 'Report',
+                      text: 'Laporan',
                       onPressed: () {
-                        print('Tombol Beranda ditekan!');
+                        Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReportPage()),
+                  );
                       },
                     ),
                     CustomButton(
@@ -70,7 +80,10 @@ class _DashboardPageState extends State<DashboardPage> {
                       icon: Icons.cloud,
                       text: 'Cuaca',
                       onPressed: () {
-                        print('Tombol Pengaturan ditekan!');
+                        Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CuacaPage()),
+                  );
                       },
                     ),
                     CustomButton(
@@ -78,18 +91,40 @@ class _DashboardPageState extends State<DashboardPage> {
                       icon: Icons.schedule,
                       text: 'Schedule',
                       onPressed: () {
-                        print('Tombol Notifikasi ditekan!');
+                      Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PenjadwalanPage()),
+                  );
                       },
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
-                CardWidget(
+               SizedBox(height: 15),
+              CardsWidget(
+                key: UniqueKey(),
+                image: AssetImage('assets/images/harga_kopi.png'),
+                text: "Cek Harga Panen",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HargaKopi()),
+                  );
+                },
+              ),
+              SizedBox(height: 10),
+                      SizedBox(height: 15),
+                CardsWidget(
                   key: UniqueKey(),
-                  // title: 'Harga Kopi',
-                  // icon: Icons.price_change_outlined,
-                  // color: Colors.brown,
-                  image: AssetImage('assets/images/harga_kopi.png')
+                  image: AssetImage('assets/images/whatsapp.png'),
+                  text: "Hubungi Admin",
+                 onPressed: () async {
+                  final url = Uri.parse('https://wa.me/6288803716911');
+                  if (await canLaunchUrl(url)){
+                    await launchUrl(url);
+                    print('Clicked');
+                  }
+                 
+                },
                 ),
                 SizedBox(height: 10),
                 Text(

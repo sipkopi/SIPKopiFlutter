@@ -4,7 +4,6 @@ import 'package:login_signup/screens/pencatatan/pembibitan/pembibitan.dart';
 import 'package:login_signup/screens/pencatatan/perawatan/perawatan.dart';
 import 'package:login_signup/screens/pencatatan/panen/panen.dart';
 
-
 class PencatatanPage extends StatefulWidget {
   @override
   _PencatatanPageState createState() => _PencatatanPageState();
@@ -26,7 +25,7 @@ class _PencatatanPageState extends State<PencatatanPage> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(5.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -41,8 +40,11 @@ class _PencatatanPageState extends State<PencatatanPage> {
                 child: SizedBox(
                   width: 350,
                   height: 130,
-                  child: CardWidget(
-                    image: AssetImage('assets/images/pembibitan.png'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25), // Set the border radius here
+                    child: CardWidget(
+                      image: AssetImage('assets/images/pembibitan.png'),
+                    ),
                   ),
                 ),
               ),
@@ -57,8 +59,11 @@ class _PencatatanPageState extends State<PencatatanPage> {
                 child: SizedBox(
                   width: 350,
                   height: 130,
-                  child: CardWidget(
-                    image: AssetImage('assets/images/perawatan.png'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25), // Set the border radius here
+                    child: CardWidget(
+                      image: AssetImage('assets/images/perawatan.png'),
+                    ),
                   ),
                 ),
               ),
@@ -73,8 +78,11 @@ class _PencatatanPageState extends State<PencatatanPage> {
                 child: SizedBox(
                   width: 350,
                   height: 130,
-                  child: CardWidget(
-                    image: AssetImage('assets/images/panen.png'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25), // Set the border radius here
+                    child: CardWidget(
+                      image: AssetImage('assets/images/panen.png'),
+                    ),
                   ),
                 ),
               ),

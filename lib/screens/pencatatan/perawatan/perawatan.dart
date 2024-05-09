@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_signup/screens/pencatatan/perawatan/perawatan_add.dart';
 
 class PerawatanPage extends StatelessWidget {
   @override
@@ -25,7 +26,10 @@ class PerawatanPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          // Implementasi fungsi push ke halaman lain
+          Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PerawatanAdd()),
+       );
         },
         child: Icon(Icons.add),
         
