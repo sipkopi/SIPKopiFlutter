@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
           onTap: onPressed,
           child: Ink(
             decoration: BoxDecoration(
-              color: Colors.green, // Warna latar belakang
+              color: Color.fromARGB(255, 224, 224, 224), // Warna latar belakang
               shape: BoxShape.circle, // Bentuk lingkaran
             ),
             child: Padding(
@@ -29,7 +29,7 @@ class CustomButton extends StatelessWidget {
               child: Icon(
                 icon,
                 size: 30,
-                color: Colors.white, // Warna ikon
+                color: Colors.green, // Warna ikon
               ),
             ),
           ),

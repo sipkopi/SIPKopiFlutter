@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_signup/screens/pencatatan/panen/panen_add.dart';
 
 class PanenPage extends StatelessWidget {
   @override
@@ -25,7 +26,10 @@ class PanenPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
          backgroundColor: Colors.green,
         onPressed: () {
-        
+              Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PanenAdd()),
+       );
         },
         child: Icon(Icons.add),
       ),

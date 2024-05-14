@@ -52,7 +52,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 25.0,
+                height: 15.0,
               ),
               TextFormField(
                 readOnly: true,
@@ -77,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 25.0,
+                height: 15.0,
               ),
               TextFormField(
                 readOnly: true,
@@ -102,7 +102,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 25.0,
+                height: 15.0,
               ),
               TextFormField(
                 readOnly: true,
@@ -127,7 +127,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 25.0,
+                height: 15.0,
               ),
               TextFormField(
                 readOnly: true,

@@ -22,6 +22,10 @@ class HeadHome extends StatelessWidget {
         const Spacer(),
         IconButton(
           onPressed: () {
+             Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NotifikasiPage()),
+                  );
           },
           style: IconButton.styleFrom(
             shape: RoundedRectangleBorder(
