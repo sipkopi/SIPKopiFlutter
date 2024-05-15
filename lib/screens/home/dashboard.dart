@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_signup/screens/home/head_home.dart';
@@ -54,10 +54,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 SizedBox(height: 10),
                 Text(
                   "Menu Cepat",
-                  style: GoogleFonts.aBeeZee(
+                  style: GoogleFonts.roboto(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 63, 63, 63),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -70,50 +70,49 @@ class _DashboardPageState extends State<DashboardPage> {
                       text: 'Laporan',
                       onPressed: () {
                         Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ReportPage()),
-                  );
+                          context,
+                          MaterialPageRoute(builder: (context) => ReportPage()),
+                        );
                       },
                     ),
                     CustomButton(
                       key: UniqueKey(),
-                      icon: Icons.cloud,
+                      icon: Icons.cloudy_snowing,
                       text: 'Cuaca',
                       onPressed: () {
                         Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CuacaPage()),
-                  );
+                          context,
+                          MaterialPageRoute(builder: (context) => CuacaPage()),
+                        );
                       },
                     ),
                     CustomButton(
                       key: UniqueKey(),
-                      icon: Icons.schedule,
-                      text: 'Schedule',
+                      icon: Icons.calendar_month,
+                      text: 'Penjadwalan',
                       onPressed: () {
-                      Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PenjadwalanPage()),
-                  );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PenjadwalanPage()),
+                        );
                       },
                     ),
                   ],
                 ),
-               SizedBox(height: 15),
-              CardsWidget(
-                key: UniqueKey(),
-                image: AssetImage('assets/images/harga_kopi.png'),
-                text: "Cek Harga Panen",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HargaKopi()),
-                  );
-                },
-              ),
-              SizedBox(height: 10),
-                      SizedBox(height: 15),
+                SizedBox(height: 15),
                 CardsWidget(
+                  key: UniqueKey(),
+                  image: AssetImage('assets/images/harga_kopi.png'),
+                  text: "Cek Harga Panen",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HargaKopi()),
+                    );
+                  },
+                ),
+                SizedBox(height: 10),
+                  CardsWidget(
                   key: UniqueKey(),
                   image: AssetImage('assets/images/whatsapp.png'),
                   text: "Hubungi Admin",
@@ -123,32 +122,46 @@ class _DashboardPageState extends State<DashboardPage> {
                     await launchUrl(url);
                     print('Clicked');
                   }
-                 
                 },
                 ),
-                SizedBox(height: 10),
-                Text(
-                  "Artikel",
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+                 SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Artikel",
+                      style: GoogleFonts.roboto(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                      
+                      },
+                      child: Text(
+                        'Selengkapnya',
+                        style: GoogleFonts.roboto(
+                          color: Colors.blue,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 10),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.7,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                      articles.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: ArticleCard(article: articles[index]),
+                      ),
+                    ),
                   ),
-                  itemCount: article.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ArticleCard(article: article[index]);
-                  },
                 ),
               ],
             ),

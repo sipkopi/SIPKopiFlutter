@@ -22,21 +22,47 @@ class HargaKopi extends StatelessWidget {
           children: [
             SizedBox(height: 20),
             Center(
-              child: Text(
-                'Informasi Harga Kopi',
-                style: GoogleFonts.aBeeZee(fontSize: 20.0),
+              
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 5),
+                    Text(
+                      'Menunjukkan harga untuk wilayah:',
+                      style: GoogleFonts.aBeeZee(fontSize: 9.0),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Kecamatan Sumber Wringin, Kabupaten Bondowoso',
+                      style: GoogleFonts.aBeeZee(fontSize: 12.0, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
             ),
-            SizedBox(height: 20),
-            // Menambahkan halaman informasi harga kopi yang telah dibuat sebelumnya
+            SizedBox(height: 10),
             HarvestPricePage(
               komoditas: 'Arabica',
+              satuan: 'Panen Kering',
               hargaSaatIni: 30000.0,
               imagePath: 'assets/images/artikel5.jpg',
               sumber: 'Sensus Pertanian BPS 2023',
             ),
             HarvestPricePage(
               komoditas: 'Robusta',
+              satuan: 'Panen Kering',
               hargaSaatIni: 25000.0,
               imagePath: 'assets/images/artikel4.jpg',
               sumber: 'Sensus Pertanian BPS 2023',

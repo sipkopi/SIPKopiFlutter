@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
 
-class PembibitanAdd extends StatelessWidget {
+class PembibitanAdd extends StatefulWidget {
+  @override
+  _PembibitanAddState createState() => _PembibitanAddState();
+}
+
+class _PembibitanAddState extends State<PembibitanAdd> {
   final TextEditingController lokasiController = TextEditingController();
   final TextEditingController pemilikController = TextEditingController();
   final TextEditingController varietasController = TextEditingController();
@@ -12,6 +18,20 @@ class PembibitanAdd extends StatelessWidget {
   final TextEditingController luasLahanController = TextEditingController();
   final TextEditingController longitudeController = TextEditingController();
   final TextEditingController latitudeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userName = prefs.getString('userNickName') ?? 'User';
+    setState(() {
+      pemilikController.text = userName;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +155,6 @@ class PembibitanAdd extends StatelessWidget {
   }
 
   void _saveData() {
-  
+    // Implementasi penyimpanan data
   }
 }

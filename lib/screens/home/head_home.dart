@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:login_signup/screens/home/menu/notifikasi.dart';
 
-class HeadHome extends StatelessWidget {
-  const HeadHome({
-    super.key,
-  });
+class HeadHome extends StatefulWidget {
+  const HeadHome({super.key});
+
+  @override
+  _HeadHomeState createState() => _HeadHomeState();
+}
+
+class _HeadHomeState extends State<HeadHome> {
+  String userName = 'User';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName') ?? 'User';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Text(
-          "Selamat Datang\nNur Muhammad Fadli",
-          style: TextStyle(
+        Text(
+          "Selamat Datang\n$userName",
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             height: 1,
@@ -22,10 +41,10 @@ class HeadHome extends StatelessWidget {
         const Spacer(),
         IconButton(
           onPressed: () {
-             Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NotifikasiPage()),
-                  );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NotifikasiPage()),
+            );
           },
           style: IconButton.styleFrom(
             shape: RoundedRectangleBorder(

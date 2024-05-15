@@ -17,6 +17,7 @@ class _PanenAddState extends State<PanenAdd> {
   final TextEditingController tanggalPanenController = TextEditingController();
   final TextEditingController tanggalRoastingController = TextEditingController();
   final TextEditingController tanggalExpiredController = TextEditingController();
+  final TextEditingController stokController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
   File? _image;
 
@@ -98,6 +99,12 @@ class _PanenAddState extends State<PanenAdd> {
               CustomTextField(
                 labelText: 'Berat',
                 controller: beratController,
+              ),
+              SizedBox(height: 15),
+              SizedBox(height: 15),
+              CustomTextField(
+                labelText: 'Stok',
+                controller: stokController,
               ),
               SizedBox(height: 15),
               CustomTextField(

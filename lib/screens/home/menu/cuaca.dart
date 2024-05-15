@@ -75,7 +75,7 @@ class _CuacaPageState extends State<CuacaPage> {
     return Text(
       _weather?.areaName ?? "",
       style: const TextStyle(
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: FontWeight.w500,
       ),
     );
@@ -194,14 +194,14 @@ class _CuacaPageState extends State<CuacaPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Wind: ${_weather?.windSpeed?.toStringAsFixed(0)} m/s",
+                "Angin: ${_weather?.windSpeed?.toStringAsFixed(0)} m/s",
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
                 ),
               ),
               Text(
-                "Humidity: ${_weather?.humidity?.toStringAsFixed(0)}%",
+                "Kelembaban: ${_weather?.humidity?.toStringAsFixed(0)}%",
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
