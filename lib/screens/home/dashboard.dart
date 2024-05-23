@@ -42,12 +42,14 @@ class _DashboardPageState extends State<DashboardPage> {
                     width: 420,
                     child: AnotherCarousel(
                       images: const [
-                        AssetImage('assets/images/naray2.png'),
-                        AssetImage('assets/images/conato.png'),
-                        AssetImage('assets/images/orilla.png'),
+                        AssetImage('assets/images/card1.png'),
+                        AssetImage('assets/images/card2.png'),
+                        AssetImage('assets/images/card3.png'),
                       ],
                       dotSize: 5,
                       indicatorBgPadding: 5.0,
+                      boxFit: BoxFit.cover,
+          
                     ),
                   ),
                 ),

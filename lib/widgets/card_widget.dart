@@ -15,7 +15,7 @@ class CardWidget extends StatelessWidget {
       child: Container(
         color: Colors.white,
         padding: EdgeInsets.all(0),
-        child: Image(image: image, fit: BoxFit.cover), // Mengatur gambar agar menyesuaikan ukuran container
+        child: Image(image: image, fit: BoxFit.cover), 
       ),
     );
   }

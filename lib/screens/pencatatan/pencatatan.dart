@@ -41,7 +41,7 @@ class _PencatatanPageState extends State<PencatatanPage> {
                   width: 350,
                   height: 130,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25), // Set the border radius here
+                    borderRadius: BorderRadius.circular(30), // Set the border radius here
                     child: CardWidget(
                       image: AssetImage('assets/images/pembibitan.png'),
                     ),
@@ -60,7 +60,7 @@ class _PencatatanPageState extends State<PencatatanPage> {
                   width: 350,
                   height: 130,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25), // Set the border radius here
+                    borderRadius: BorderRadius.circular(30), 
                     child: CardWidget(
                       image: AssetImage('assets/images/perawatan.png'),
                     ),
@@ -79,7 +79,7 @@ class _PencatatanPageState extends State<PencatatanPage> {
                   width: 350,
                   height: 130,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25), // Set the border radius here
+                    borderRadius: BorderRadius.circular(30), // Set the border radius here
                     child: CardWidget(
                       image: AssetImage('assets/images/panen.png'),
                     ),

@@ -31,7 +31,7 @@ class _QrcodePageState extends State<QrcodePage> {
                 children: [
                   PrettyQr(
                     data: qrData,
-                    image: AssetImage('assets/images/logokopi.png'),
+                    image: AssetImage('assets/images/logopkm.png'),
                     size: 200,
                     errorCorrectLevel: QrErrorCorrectLevel.L,
                   ), 

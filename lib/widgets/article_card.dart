@@ -43,8 +43,8 @@ class ArticleCard extends StatelessWidget {
                       Text(
                         article.name,
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15.0,
                         ),
                       ),
                       SizedBox(height: 4.0),
@@ -114,12 +114,12 @@ final List<Article> articles = [
   Article(
     name: 'Mengenal Standar Mutu Kopi Ekspor',
     link: 'https://www.aeki-aice.org/mutu-kopi/',
-    image: 'assets/images/artikel4.jpg',
+    image: 'assets/images/artikell1.jpg',
   ),
   Article(
-    name: 'Standar Ekspor Biji Kopi',
+    name: 'Pelajari Standar Mutu Biji Kopi',
     link: 'https://www.cctcid.com/2018/08/29/beberapa-standard-pemeringkatan-mutu-biji-kopi-2/',
-    image: 'assets/images/artikel5.jpg',
+    image: 'assets/images/robusta.jpg',
   ),
 ];
 

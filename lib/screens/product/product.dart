@@ -8,25 +8,25 @@ class ProductPage extends StatelessWidget {
     {
       "id": 1,
       "title": "Arabica",
-      "image": "assets/images/artikel4.jpg",
+      "image": "assets/images/arabicaa.jpg",
       "detail": "Full wash",
     },
     {
       "id": 2,
       "title": "Arabica",
-      "image": "assets/images/artikel4.jpg",
+      "image": "assets/images/kopi3.jpg",
       "detail": "Natural",
     },
     {
       "id": 3,
       "title": "Arabica",
-      "image": "assets/images/artikel4.jpg",
+      "image": "assets/images/arabicaa.jpg",
       "detail": "Blue Mountain",
     },
     {
       "id": 4,
       "title": "Robusta",
-      "image": "assets/images/artikel4.jpg",
+      "image": "assets/images/kopi3.jpg",
       "detail": "Full wash",
     },
   ];

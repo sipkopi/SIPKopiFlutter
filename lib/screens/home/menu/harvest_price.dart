@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class HarvestPricePage extends StatelessWidget {
   final String komoditas;
-  final double hargaSaatIni;
+  final String hargaSaatIni;
   final String satuan;
   final String imagePath;
   final String sumber;
@@ -49,8 +49,8 @@ class HarvestPricePage extends StatelessWidget {
               style: GoogleFonts.roboto(fontSize: 16),
             ),
             SizedBox(height: 2),
-            Text(
-              'Harga Saat Ini: Rp ${hargaSaatIni.toStringAsFixed(0)}',
+          Text(
+              'Harga Saat ini: $hargaSaatIni',
               style: GoogleFonts.roboto(fontSize: 16),
             ),
             SizedBox(height: 4),

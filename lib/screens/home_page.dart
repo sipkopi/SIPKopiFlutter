@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
     DashboardPage(),
     PencatatanPage(),
     QrcodePage(),
+     //CircularProgressIndicator(),
     ProductPage(),
     ProfilePage(),
   ];
@@ -26,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
         buttonBackgroundColor: Colors.green,
