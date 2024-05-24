@@ -16,10 +16,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     DashboardPage(),
+    ProductPage(),
     PencatatanPage(),
     QrcodePage(),
-     //CircularProgressIndicator(),
-    ProductPage(),
     ProfilePage(),
   ];
   int _page = 0;
@@ -35,9 +34,10 @@ class _HomePageState extends State<HomePage> {
         animationDuration: const Duration(milliseconds: 200),
         items: const <Widget>[
           Icon(Icons.home, size: 26, color: Colors.white),
+          Icon(Icons.production_quantity_limits, size: 26, color: Colors.white),
           Icon(Icons.note_alt, size: 26, color: Colors.white),
           Icon(Icons.qr_code, size: 26, color: Colors.white),
-          Icon(Icons.production_quantity_limits, size: 26, color: Colors.white),
+      
           Icon(Icons.person, size: 26, color: Colors.white),
         ],
         onTap: (index) {
