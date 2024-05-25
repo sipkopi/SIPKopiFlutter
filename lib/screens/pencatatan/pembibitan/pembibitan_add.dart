@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
 
@@ -122,7 +124,6 @@ class _PembibitanAddState extends State<PembibitanAdd> {
                   primary: Colors.green,
                 ),
                 onPressed: () {
-                  // Lakukan aksi saat tombol ditekan
                   if (_validateInputs()) {
                     _saveData();
                   } else {
@@ -154,7 +155,47 @@ class _PembibitanAddState extends State<PembibitanAdd> {
         latitudeController.text.isNotEmpty;
   }
 
-  void _saveData() {
-    // Implementasi penyimpanan data
+  Future<void> _saveData() async {
+    final String apiUrl = 'https://dev.sipkopi.com/api/lahan/tambah';
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'user': pemilikController.text,
+          'varietas_pohon': varietasController.text,
+          'total_bibit': jumlahBibitController.text,
+          'luas_lahan': luasLahanController.text,
+          'tanggal': tanggalController.text,
+          'ketinggian_tanam': ketinggianController.text,
+          'lokasi_lahan': lokasiController.text,
+          'longtitude': longitudeController.text,
+          'latitude': latitudeController.text,
+        }),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Data berhasil disimpan.'),
+          ),
+        );
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal menyimpan data. Status: ${response.statusCode}'),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: $e'),
+        ),
+      );
+    }
   }
 }

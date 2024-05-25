@@ -35,8 +35,6 @@ class _PembibitanPageState extends State<PembibitanPage> {
       if (response.statusCode == 200) {
         print('Response: ${response.body}');
         List<dynamic> jsonResponse = json.decode(response.body);
-
-        // Check if jsonResponse contains a valid list of lists
         if (jsonResponse is List && jsonResponse.isNotEmpty && jsonResponse[0] is List) {
           List<dynamic> innerList = jsonResponse[0];
 
