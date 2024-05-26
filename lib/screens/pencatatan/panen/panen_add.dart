@@ -3,6 +3,8 @@ import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:login_signup/screens/pencatatan/panen/api_service.dart';
+import 'package:login_signup/screens/pencatatan/panen/panen.dart';
 
 class PanenAdd extends StatefulWidget {
   @override
@@ -22,17 +24,17 @@ class _PanenAddState extends State<PanenAdd> {
   File? _image;
 
   Future<void> pickImage() async {
-  final picker = ImagePicker();
-  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-  setState(() {
-    if (pickedFile != null) {
-      _image = File(pickedFile.path);
-    } else {
-      print('No image selected.');
-    }
-  });
-}
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +103,6 @@ class _PanenAddState extends State<PanenAdd> {
                 controller: beratController,
               ),
               SizedBox(height: 15),
-              SizedBox(height: 15),
               CustomTextField(
                 labelText: 'Stok',
                 controller: stokController,
@@ -145,12 +146,42 @@ class _PanenAddState extends State<PanenAdd> {
         tanggalPanenController.text.isNotEmpty &&
         tanggalRoastingController.text.isNotEmpty &&
         deskripsiController.text.isNotEmpty &&
-        tanggalExpiredController.text.isNotEmpty;
+        tanggalExpiredController.text.isNotEmpty &&
+        stokController.text.isNotEmpty &&
+        _image != null;
   }
 
-  void _saveData() {
-    // Implementasi penyimpanan data
-    // Anda dapat mengakses nilai dari controller menggunakan:
-    // kodeController.text, varietasController.text, dll.
+  void _saveData() async {
+    // Panggil method ApiService untuk menyimpan data
+    var result = await ApiService.tambahKopi(
+      kode: kodeController.text,
+      varietas: varietasController.text,
+      metodePengolahan: metodePengolahanController.text,
+      tglPanen: tanggalPanenController.text,
+      tglRoasting: tanggalRoastingController.text,
+      tglExp: tanggalExpiredController.text,
+      berat: beratController.text,
+      stok: stokController.text,
+      deskripsi: deskripsiController.text,
+      gambar1: _image!,
+    );
+
+    if (result['success']) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(result['message']),
+        ),
+      );
+       Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => PanenPage()), 
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(result['message']),
+        ),
+      );
+    }
   }
 }
