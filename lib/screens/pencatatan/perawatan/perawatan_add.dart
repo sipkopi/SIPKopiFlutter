@@ -145,6 +145,7 @@ class _PerawatanAddState extends State<PerawatanAdd> {
               CustomTextField(
                 labelText: 'Jumlah Tanam',
                 controller: jumlahTanamController,
+                isTextInput: false,
               ),
               SizedBox(height: 20),
               Row(
@@ -162,6 +163,7 @@ class _PerawatanAddState extends State<PerawatanAdd> {
                     child: CustomTextField(
                       labelText: 'Kebutuhan Pupuk',
                       controller: kebutuhanPupukController,
+                      isTextInput: false,
                     ),
                   ),
                 ],

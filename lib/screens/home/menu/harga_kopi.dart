@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login_signup/screens/home/menu/harvest_price.dart';
 
 class HargaKopi extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

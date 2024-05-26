@@ -74,11 +74,13 @@ class _PembibitanAddState extends State<PembibitanAdd> {
               CustomTextField(
                 labelText: 'Ketinggian Tanam',
                 controller: ketinggianController,
+                isTextInput: false,
               ),
               SizedBox(height: 15),
               CustomTextField(
                 labelText: 'Jumlah Bibit',
                 controller: jumlahBibitController,
+                isTextInput: false,
               ),
               SizedBox(height: 20),
               Row(
@@ -95,6 +97,7 @@ class _PembibitanAddState extends State<PembibitanAdd> {
                     child: CustomTextField(
                       labelText: 'Luas Lahan',
                       controller: luasLahanController,
+                      isTextInput: false,
                     ),
                   ),
                 ],

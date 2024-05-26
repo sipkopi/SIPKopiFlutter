@@ -20,7 +20,7 @@ class _ReportPageState extends State<ReportPage> {
 
   Future<String?> _loadUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('userNickName'); // Pastikan ini sesuai dengan nama key yang Anda gunakan saat menyimpan username
+    return prefs.getString('userNickName'); 
   }
 
   Future<void> loadData() async {

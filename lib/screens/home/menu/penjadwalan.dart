@@ -31,12 +31,12 @@ class PenjadwalanPage extends StatelessWidget {
             children: [
               SizedBox(height: 40),
               CustomTextField(
-                labelText: 'Title',
+                labelText: 'Judul',
                 controller: titleController,
               ),
               SizedBox(height: 15),
               CustomTextField(
-                labelText: 'Subject',
+                labelText: 'Deskripsi',
                 controller: subjectController,
               ),
               SizedBox(height: 20),

@@ -27,7 +27,7 @@ Future<void> loadData() async {
     );
 
     if (response.statusCode == 200) {
-      print('Response: ${response.body}');
+      //print('Response: ${response.body}');
       Map<String, dynamic> jsonResponse = json.decode(response.body);
       List<dynamic>? dataAkun = jsonResponse['Data Akun'];
       if (dataAkun is List) {

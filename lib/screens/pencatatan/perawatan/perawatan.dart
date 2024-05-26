@@ -25,7 +25,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
-        print('Response: $jsonResponse');
+        //print('Response: $jsonResponse');
 
         if (jsonResponse.containsKey('Data Lahan')) {
           setState(() {

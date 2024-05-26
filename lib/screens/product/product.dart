@@ -23,7 +23,7 @@ class _ProductPageState extends State<ProductPage> {
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
-        print('Response: $jsonResponse');
+        //print('Response: $jsonResponse');
 
         if (jsonResponse.containsKey('Data Akun')) {
           setState(() {

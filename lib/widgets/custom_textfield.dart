@@ -5,6 +5,7 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   final TextEditingController controller;
   final bool readOnly;
+  final bool isTextInput;
 
   const CustomTextField({
     Key? key,
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     required this.controller,
     this.readOnly = false,
+    this.isTextInput = true, 
   }) : super(key: key);
 
   @override
@@ -19,12 +21,13 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       readOnly: readOnly,
+      keyboardType: isTextInput ? TextInputType.text : TextInputType.number,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
         hintStyle: const TextStyle(
           color: Colors.green,
-          fontSize: 20
+          fontSize: 27,
         ),
         border: OutlineInputBorder(
           borderSide: const BorderSide(

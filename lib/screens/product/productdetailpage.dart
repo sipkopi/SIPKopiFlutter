@@ -21,7 +21,7 @@ class ProductDetailPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    product['gambar1'] ?? 'https://dev.sipkopi.com/gambarproduk/20240521_664c3b92c96ba.jpg',
+                    product['gambar1'] ?? 'assets/images/kopi3.jpg',
                     loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) {
                         return child;
