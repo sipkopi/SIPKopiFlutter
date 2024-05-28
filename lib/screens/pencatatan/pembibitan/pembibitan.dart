@@ -11,6 +11,8 @@ class PembibitanPage extends StatefulWidget {
 
 class _PembibitanPageState extends State<PembibitanPage> {
   List<Map<String, dynamic>> data = [];
+  bool isLoading = true;
+  String errorMessage = '';
 
   @override
   void initState() {
@@ -38,23 +40,35 @@ class _PembibitanPageState extends State<PembibitanPage> {
         if (jsonResponse is List && jsonResponse.isNotEmpty && jsonResponse[0] is List) {
           List<dynamic> innerList = jsonResponse[0];
 
-         
           if (innerList.isNotEmpty && innerList[0] is Map<String, dynamic>) {
             setState(() {
               data = innerList.map((item) => item as Map<String, dynamic>).toList();
+              isLoading = false;
             });
           } else {
             print('Unexpected inner list format');
+            setState(() {
+              isLoading = false;
+            });
           }
         } else {
           print('Unexpected response format');
+          setState(() {
+            isLoading = false;
+          });
         }
       } else {
         print('Failed to load data: ${response.statusCode}');
+        setState(() {
+          isLoading = false;
+        });
         throw Exception('Failed to load data');
       }
     } catch (e) {
       print('Error: $e');
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -72,101 +86,110 @@ class _PembibitanPageState extends State<PembibitanPage> {
         ),
         centerTitle: true,
       ),
-      body: data.isEmpty
+      body: isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (context, index) {
-                final item = data[index];
-                final kodeLahan = item['kode_lahan'] ?? 'Tidak ada data';
-                final varietasPohon = item['varietas_pohon'] ?? 'Tidak ada data';
-                final totalBibit = item['total_bibit'].toString();
-                final tanggal = item['tanggal'] ?? 'Tidak ada data';
-                final lokasiLahan = item['lokasi_lahan'] ?? 'Tidak ada data';
+          : data.isEmpty
+              ? Center(
+                  child: Text(
+                    'Tidak ada Data',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    final item = data[index];
+                    final kodeLahan = item['kode_lahan'] ?? 'Tidak ada data';
+                    final varietasPohon = item['varietas_pohon'] ?? 'Tidak ada data';
+                    final totalBibit = item['total_bibit'].toString();
+                    final tanggal = item['tanggal'] ?? 'Tidak ada data';
+                    final lokasiLahan = item['lokasi_lahan'] ?? 'Tidak ada data';
 
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                  child: Card(
-                    elevation: 4.0,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.local_florist, 
-                        color: Colors.green, 
-                      ),
-                      title: Text(
-                        'Kode Lahan: $kodeLahan',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Roboto', 
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                      child: Card(
+                        elevation: 4.0,
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.local_florist,
+                            color: Colors.green,
+                          ),
+                          title: Text(
+                            'Kode Lahan: $kodeLahan',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Roboto',
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.coffee,
+                                    color: Colors.green,
+                                    size: 16.0,
+                                  ),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    'Total Bibit: $totalBibit',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      color: Colors.grey[800],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today,
+                                    color: Colors.green,
+                                    size: 16.0,
+                                  ),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    'Tanggal: $tanggal',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      color: Colors.grey[800],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    color: Colors.green,
+                                    size: 16.0,
+                                  ),
+                                  SizedBox(width: 8.0),
+                                  Text(
+                                    'Lokasi Lahan: $lokasiLahan',
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      color: Colors.grey[800],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          onTap: () {
+                            // Tambahkan logika navigasi jika diperlukan
+                          },
                         ),
                       ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                              Icons.coffee,
-                                color: Colors.green, 
-                                size: 16.0, 
-                              ),
-                              SizedBox(width: 8.0),
-                              Text(
-                                'Total Bibit: $totalBibit',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto', 
-                                  color: Colors.grey[800],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.calendar_today, 
-                                color: Colors.green, 
-                                size: 16.0, 
-                              ),
-                              SizedBox(width: 8.0),
-                              Text(
-                                'Tanggal: $tanggal',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto', 
-                                  color: Colors.grey[800],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.location_on, 
-                                color: Colors.green, 
-                                size: 16.0,
-                              ),
-                              SizedBox(width: 8.0),
-                              Text(
-                                'Lokasi Lahan: $lokasiLahan',
-                                style: TextStyle(
-                                  fontFamily: 'Roboto', 
-                                  color: Colors.grey[800],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-            
-          },
-        ),
-      ),
-    );
-  },
-),
-
+                    );
+                  },
+                ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {

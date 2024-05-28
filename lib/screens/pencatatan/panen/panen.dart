@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'package:login_signup/screens/pencatatan/panen/panen_add.dart';
+import 'package:login_signup/services/panen_api.dart'; // Import PanenApi
 
 class PanenPage extends StatefulWidget {
   @override
@@ -13,6 +12,7 @@ class _PanenPageState extends State<PanenPage> {
   List<Map<String, dynamic>> data = [];
   bool isLoading = true;
   String errorMessage = '';
+  final PanenApi panenApi = PanenApi();
 
   @override
   void initState() {
@@ -20,45 +20,20 @@ class _PanenPageState extends State<PanenPage> {
     loadData();
   }
 
-Future<void> loadData() async {
-  try {
-    final response = await http.get(
-      Uri.parse('https://dev.sipkopi.com/api/kopi/tampil'),
-    );
-
-    if (response.statusCode == 200) {
-      //print('Response: ${response.body}');
-      Map<String, dynamic> jsonResponse = json.decode(response.body);
-      List<dynamic>? dataAkun = jsonResponse['Data Akun'];
-      if (dataAkun is List) {
-        setState(() {
-          data = dataAkun.cast<Map<String, dynamic>>();
-          isLoading = false;
-        });
-      } else {
-        setState(() {
-          errorMessage = 'Unexpected response format';
-          isLoading = false;
-        });
-        print('Unexpected response format');
-      }
-    } else {
+  Future<void> loadData() async {
+    try {
+      final fetchedData = await panenApi.fetchData();
       setState(() {
-        errorMessage = 'Failed to load data: ${response.statusCode}';
+        data = fetchedData;
         isLoading = false;
       });
-      print('Failed to load data: ${response.statusCode}');
-      throw Exception('Failed to load data');
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Error: $e';
+        isLoading = false;
+      });
     }
-  } catch (e) {
-    setState(() {
-      errorMessage = 'Error: $e';
-      isLoading = false;
-    });
-    print('Error: $e');
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +63,7 @@ Future<void> loadData() async {
               : data.isEmpty
                   ? Center(
                       child: Text(
-                        'Data Kosong!',
+                        'Tidak Ada Data',
                         style: GoogleFonts.aBeeZee(fontSize: 20.0),
                       ),
                     )

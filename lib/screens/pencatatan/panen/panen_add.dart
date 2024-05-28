@@ -3,7 +3,7 @@ import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:login_signup/screens/pencatatan/panen/api_service.dart';
+import 'package:login_signup/services/api_service.dart';
 import 'package:login_signup/screens/pencatatan/panen/panen.dart';
 
 class PanenAdd extends StatefulWidget {
@@ -42,7 +42,7 @@ class _PanenAddState extends State<PanenAdd> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          "Tambah Perawatan",
+          "Tambah Hasil Panen",
           style: TextStyle(
             color: Colors.green,
             fontWeight: FontWeight.w600,
