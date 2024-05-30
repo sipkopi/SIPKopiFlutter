@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:login_signup/screens/home/menu/notifikasi.dart';
+import 'package:login_signup/screens/home/menu/notifikasi_page.dart';
 
 class HeadHome extends StatefulWidget {
   const HeadHome({super.key});

@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_timepicker.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
+import 'package:login_signup/services/database_helper.dart'; // Import DatabaseHelper
+import 'package:login_signup/models/notifikasi.dart'; // Import Notifikasi model
 
 class PenjadwalanPage extends StatelessWidget {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController subjectController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController timeController = TextEditingController();
+
+  final DatabaseHelper dbHelper = DatabaseHelper(); // Inisialisasi DatabaseHelper
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +48,8 @@ class PenjadwalanPage extends StatelessWidget {
                 labelText: 'Date',
                 controller: dateController,
               ),
-                SizedBox(height: 15),
-              CustomTimePickerField( // Gunakan CustomTimePickerField
+              SizedBox(height: 15),
+              CustomTimePickerField(
                 labelText: 'Time',
                 controller: timeController,
               ),
@@ -54,10 +58,15 @@ class PenjadwalanPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.green,
                 ),
-                onPressed: () {
-                  // Lakukan aksi saat tombol ditekan
+                onPressed: () async {
                   if (_validateInputs()) {
-                    _saveData();
+                    await _saveData();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Data berhasil disimpan.'),
+                      ),
+                    );
+                    Navigator.pop(context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -82,8 +91,16 @@ class PenjadwalanPage extends StatelessWidget {
         timeController.text.isNotEmpty;
   }
 
-  void _saveData() {
-    // Lakukan aksi untuk menyimpan data ke dalam database atau sumber data lainnya
-    // Gunakan nilai dari titleController.text, subjectController.text, dateController.text, dan timeController.text
+  Future<void> _saveData() async {
+    // Membuat instance Notifikasi
+    Notifikasi notifikasi = Notifikasi(
+      judul: titleController.text,
+      deskripsi: subjectController.text,
+      tanggal: dateController.text,
+      jam: timeController.text,
+    );
+
+    // Menyimpan notifikasi ke database
+    await dbHelper.createNotifikasi(notifikasi);
   }
 }

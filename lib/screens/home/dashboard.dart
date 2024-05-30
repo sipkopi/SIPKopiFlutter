@@ -10,7 +10,7 @@ import 'package:login_signup/models/article.dart';
 import 'package:login_signup/screens/home/menu/cuaca.dart';
 import 'package:login_signup/screens/home/menu/penjadwalan.dart';
 import 'package:login_signup/screens/home/menu/report.dart';
-import 'package:login_signup/screens/home/menu/notifikasi.dart';
+import 'package:login_signup/screens/home/menu/notifikasi_page.dart';
 import 'package:login_signup/widgets/article_card.dart';
 import 'package:url_launcher/url_launcher.dart'; 
 

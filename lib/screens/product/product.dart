@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_signup/screens/product/productdetailpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductPage extends StatefulWidget {
   @override
@@ -16,14 +17,23 @@ class _ProductPageState extends State<ProductPage> {
     super.initState();
     loadProducts();
   }
+  Future<String> _loadUserName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userName = prefs.getString('userNickName') ?? 'User';
+    return userName;
+  }
 
   Future<void> loadProducts() async {
-    try {
-      final response = await http.get(Uri.parse('https://dev.sipkopi.com/api/kopi/tampil'));
+   try {
+      final userName = await _loadUserName();
+      final response = await http.get(
+        //https://dev.sipkopi.com/api/kopi/tampil/user/(username)
+        Uri.parse('https://dev.sipkopi.com/api/kopi/tampil/user/$userName'),
+      );
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
-        //print('Response: $jsonResponse');
+       
 
         if (jsonResponse.containsKey('Data Akun')) {
           setState(() {

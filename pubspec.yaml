@@ -55,9 +55,8 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   screenshot: ^2.5.0
   permission_handler: ^11.3.1
- 
-  
-  
+  sqflite: ^2.3.0
+  path: ^1.8.3 
 
 
 

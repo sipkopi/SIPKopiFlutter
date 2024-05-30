@@ -164,6 +164,7 @@ class _PembibitanPageState extends State<PembibitanPage> {
                                 ],
                               ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Icon(
                                     Icons.location_on,
@@ -171,11 +172,13 @@ class _PembibitanPageState extends State<PembibitanPage> {
                                     size: 16.0,
                                   ),
                                   SizedBox(width: 8.0),
-                                  Text(
-                                    'Lokasi Lahan: $lokasiLahan',
-                                    style: TextStyle(
-                                      fontFamily: 'Roboto',
-                                      color: Colors.grey[800],
+                                  Flexible(
+                                    child: Text(
+                                      'Lokasi Lahan: $lokasiLahan',
+                                      style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        color: Colors.grey[800],
+                                      ),
                                     ),
                                   ),
                                 ],

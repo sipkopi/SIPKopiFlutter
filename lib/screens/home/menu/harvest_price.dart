@@ -5,7 +5,6 @@ class HarvestPricePage extends StatelessWidget {
   final String komoditas;
   final String hargaSaatIni;
   final String satuan;
-  final String imagePath;
   final String sumber;
   final double borderRadius;
 
@@ -13,9 +12,8 @@ class HarvestPricePage extends StatelessWidget {
     required this.komoditas,
     required this.hargaSaatIni,
     required this.satuan,
-    required this.imagePath,
     required this.sumber,
-    this.borderRadius = 8.0,  // Default border radius value
+    this.borderRadius = 8.0, 
   });
 
   @override
@@ -27,36 +25,49 @@ class HarvestPricePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(borderRadius),
-              child: Container(
-                height: 200,
-                color: Colors.grey[200],
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
+            SizedBox(height: 5),
+            Row(
+              children: [
+                Icon(Icons.local_cafe, color: Colors.green),
+                SizedBox(width: 8),
+                Text(
+                  'Komoditas: $komoditas',
+                  style: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-              ),
+              ],
             ),
             SizedBox(height: 5),
-            Text(
-              'Komoditas: $komoditas',
-              style: GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(
-              'Satuan: $satuan',
-              style: GoogleFonts.roboto(fontSize: 16),
+            Row(
+              children: [
+                Icon(Icons.scale, color: Colors.green),
+                SizedBox(width: 8),
+                Text(
+                  'Satuan: $satuan',
+                  style: GoogleFonts.roboto(fontSize: 16),
+                ),
+              ],
             ),
             SizedBox(height: 2),
-          Text(
-              'Harga Saat ini: $hargaSaatIni',
-              style: GoogleFonts.roboto(fontSize: 16),
+            Row(
+              children: [
+                Icon(Icons.monetization_on, color: Colors.green),
+                SizedBox(width: 8),
+                Text(
+                  'Harga Saat ini: $hargaSaatIni',
+                  style: GoogleFonts.roboto(fontSize: 16),
+                ),
+              ],
             ),
             SizedBox(height: 4),
-            Text(
-              'Sumber: $sumber',
-              style: GoogleFonts.roboto(fontSize: 12, color: Colors.grey),
+            Row(
+              children: [
+                Icon(Icons.info_outline, color: Colors.green),
+                SizedBox(width: 8),
+                Text(
+                  'Sumber: $sumber',
+                  style: GoogleFonts.roboto(fontSize: 12, color: Colors.grey),
+                ),
+              ],
             ),
           ],
         ),
