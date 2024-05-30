@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:login_signup/services/api_service.dart';
@@ -12,7 +15,6 @@ class PanenAdd extends StatefulWidget {
 }
 
 class _PanenAddState extends State<PanenAdd> {
-  final TextEditingController kodeController = TextEditingController();
   final TextEditingController varietasController = TextEditingController();
   final TextEditingController metodePengolahanController = TextEditingController();
   final TextEditingController beratController = TextEditingController();
@@ -22,6 +24,59 @@ class _PanenAddState extends State<PanenAdd> {
   final TextEditingController stokController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
   File? _image;
+
+  String? selectedKodePerawatan;
+  List<String> kodePerawatanList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchKodePerawatan();
+  }
+
+  Future<void> _fetchKodePerawatan() async {
+    try {
+      final userName = await _loadUserName();
+      if (userName == null) {
+        throw Exception('User Name is null');
+      }
+      final response = await http.get(
+        Uri.parse('https://dev.sipkopi.com/api/pere/tampil/user/$userName'),
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> jsonResponse = json.decode(response.body);
+        if (jsonResponse is List && jsonResponse.isNotEmpty && jsonResponse[0] is List) {
+          List<dynamic> innerList = jsonResponse[0];
+          if (innerList.isNotEmpty && innerList[0] is Map<String, dynamic>) {
+            setState(() {
+              kodePerawatanList = innerList.map((item) => item['kode_peremajaan'] as String).toList();
+            });
+          } else {
+            print('Unexpected inner list format');
+          }
+        } else {
+          print('Unexpected response format');
+        }
+      } else {
+        print('Failed to load data: ${response.statusCode}');
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<String?> _loadUserName() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? userName = prefs.getString('userNickName');
+      return userName;
+    } catch (e) {
+      print('Error loading username: $e');
+      return null;
+    }
+  }
 
   Future<void> pickImage() async {
     final picker = ImagePicker();
@@ -48,7 +103,13 @@ class _PanenAddState extends State<PanenAdd> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        centerTitle: true,
+     centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.green),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -68,9 +129,23 @@ class _PanenAddState extends State<PanenAdd> {
                     : Image.file(_image!),
               ),
               SizedBox(height: 20),
-              CustomTextField(
-                labelText: 'Kode',
-                controller: kodeController,
+              DropdownButtonFormField<String>(
+                value: selectedKodePerawatan,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedKodePerawatan = newValue;
+                  });
+                },
+                items: kodePerawatanList.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  labelText: 'Kode Perawatan',
+                  border: OutlineInputBorder(),
+                ),
               ),
               SizedBox(height: 15),
               CustomTextField(
@@ -139,7 +214,7 @@ class _PanenAddState extends State<PanenAdd> {
   }
 
   bool _validateInputs() {
-    return kodeController.text.isNotEmpty &&
+    return selectedKodePerawatan != null &&
         varietasController.text.isNotEmpty &&
         metodePengolahanController.text.isNotEmpty &&
         beratController.text.isNotEmpty &&
@@ -154,7 +229,7 @@ class _PanenAddState extends State<PanenAdd> {
   void _saveData() async {
     // Panggil method ApiService untuk menyimpan data
     var result = await ApiService.tambahKopi(
-      kode: kodeController.text,
+      kode: selectedKodePerawatan!, // Gunakan selectedKodePerawatan
       varietas: varietasController.text,
       metodePengolahan: metodePengolahanController.text,
       tglPanen: tanggalPanenController.text,

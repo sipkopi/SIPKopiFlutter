@@ -47,7 +47,13 @@ class _PembibitanAddState extends State<PembibitanAdd> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        centerTitle: true,
+       centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.green),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

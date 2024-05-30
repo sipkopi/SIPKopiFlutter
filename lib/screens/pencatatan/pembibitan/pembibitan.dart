@@ -84,7 +84,13 @@ class _PembibitanPageState extends State<PembibitanPage> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        centerTitle: true,
+    centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.green),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: isLoading
           ? Center(
