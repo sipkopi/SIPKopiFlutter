@@ -106,7 +106,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       // get started text
                       Text(
-                        'Get Started',
+                        'Mari Mulai',
                         style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w900,
@@ -315,13 +315,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             activeColor: Colors.green,
                           ),
                           const Text(
-                            'I agree to the processing of ',
+                            'Saya Setuju untuk Memproses ',
                             style: TextStyle(
                               color: Colors.black45,
                             ),
                           ),
                           Text(
-                            'Personal data',
+                            'Data Pribadi',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.green,
@@ -345,7 +345,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               signUp();
                             } else if (!agreePersonalData) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Please agree to the processing of personal data')),
+                                const SnackBar(content: Text('Harap Setujui Pemrosesan Data Pribadi')),
                               );
                             }
                           },
@@ -359,53 +359,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Colors.grey.withOpacity(0.5),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 0,
-                              horizontal: 10,
-                            ),
-                            child: Text(
-                              'Sign up with',
-                              style: TextStyle(
-                                color: Colors.black45,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Colors.grey.withOpacity(0.5),
-                            ),
-                          ),
                         ],
                       ),
                       const SizedBox(
-                        height: 30.0,
+                        height: 10.0,
                       ),
-                      // sign up social media logo
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Logo(Logos.facebook_f),
-                          Logo(Logos.google),
-                          Logo(Logos.apple),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 25.0,
-                      ),
-                      // already have an account
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            'Already have an account? ',
+                            'Sudah Memiliki Akun? ',
                             style: TextStyle(
                               color: Colors.black45,
                             ),

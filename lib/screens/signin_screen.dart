@@ -70,9 +70,9 @@ class _SignInScreenState extends State<SignInScreen> {
           if (userJson is Map<String, dynamic>) {
             User user = User.fromJson(userJson);
 
-            // Verifikasi password
+            
             if (user.pass == password) {
-              // Simpan status login pengguna
+              
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setBool('isLoggedIn', true);
               prefs.setString('userName', user.nama);
@@ -167,7 +167,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'Welcome back',
+                        'Selamat Datang',
                         style: TextStyle(
                           fontSize: 30.0,
                           fontWeight: FontWeight.w900,
@@ -181,13 +181,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         controller: _emailController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter Email';
+                            return 'Tolong isikan Email';
                           }
                           return null;
                         },
                         decoration: InputDecoration(
                           label: const Text('Email'),
-                          hintText: 'Enter Email',
+                          hintText: 'Isikan Email Anda',
                           hintStyle: const TextStyle(
                             color: Colors.black26,
                           ),
@@ -214,13 +214,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         obscuringCharacter: '*',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter Password';
+                            return 'Tolong Isikan Password';
                           }
                           return null;
                         },
                         decoration: InputDecoration(
                           label: const Text('Password'),
-                          hintText: 'Enter Password',
+                          hintText: 'Isikan Password Anda',
                           hintStyle: const TextStyle(
                             color: Colors.black26,
                           ),
@@ -251,7 +251,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       rememberPassword = value!;
-                                      _saveCredentials(); // Simpan email dan password saat status checkbox berubah
+                                      _saveCredentials(); 
                                     });
                                   },
                                   activeColor: Colors.green,
@@ -295,55 +295,17 @@ class _SignInScreenState extends State<SignInScreen> {
                       const SizedBox(
                         height: 25.0,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Colors.grey.withOpacity(0.5),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 0,
-                              horizontal: 10,
-                            ),
-                            child: Text(
-                              'Sign up with',
-                              style: TextStyle(
-                                color: Colors.black45,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Colors.grey.withOpacity(0.5),
-                            ),
-                          ),
-                        ],
-                      ),
+                  
                       const SizedBox(
-                        height: 25.0,
+                        height: 10.0,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Logo(Logos.facebook_f),
-                          Logo(Logos.google),
-                          Logo(Logos.apple),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 25.0,
-                      ),
-                      // don't have an account
+          
+                    
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            'Don\'t have an account? ',
+                            'Tidak Memiliki Akun? ',
                             style: TextStyle(
                               color: Colors.black45,
                             ),
