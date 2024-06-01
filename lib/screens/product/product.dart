@@ -11,12 +11,15 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   List<Map<String, dynamic>> products = [];
+  bool isLoading = true;
+  String errorMessage = '';
 
   @override
   void initState() {
     super.initState();
     loadProducts();
   }
+
   Future<String> _loadUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userName = prefs.getString('userNickName') ?? 'User';
@@ -24,30 +27,30 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Future<void> loadProducts() async {
-   try {
+    try {
       final userName = await _loadUserName();
       final response = await http.get(
-        //https://dev.sipkopi.com/api/kopi/tampil/user/(username)
         Uri.parse('https://dev.sipkopi.com/api/kopi/tampil/user/$userName'),
       );
 
       if (response.statusCode == 200) {
         final jsonResponse = json.decode(response.body);
-       
-
-        if (jsonResponse.containsKey('Data Akun')) {
+        if (jsonResponse is List && jsonResponse.isNotEmpty && jsonResponse[0] is List) {
           setState(() {
-            products = List<Map<String, dynamic>>.from(jsonResponse['Data Akun']);
+            products = List<Map<String, dynamic>>.from(jsonResponse[0]);
+            isLoading = false;
           });
         } else {
-          print('Data produk tidak ditemukan dalam respons');
+          throw Exception('Respons JSON tidak sesuai dengan yang diharapkan');
         }
       } else {
-        print('Failed to load products: ${response.statusCode}');
-        throw Exception('Failed to load products');
+        throw Exception('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error: $e');
+      setState(() {
+        errorMessage = 'Error: $e';
+        isLoading = false;
+      });
     }
   }
 
@@ -62,126 +65,130 @@ class _ProductPageState extends State<ProductPage> {
         ),
         centerTitle: true,
       ),
-      body: products.isEmpty
+      body: isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ListView(
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 5,
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Search for..",
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
+          : errorMessage.isNotEmpty
+              ? Center(
+                  child: Text(errorMessage),
+                )
+              : ListView(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.search),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Search for..",
+                                hintStyle: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                  padding: EdgeInsets.all(30),
-                  children: products.map(
-                    (product) => InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductDetailPage(product: product),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              offset: Offset(0, 5),
-                              color: Theme.of(context).primaryColor.withOpacity(.2),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                            )
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ClipRRect(
+                          )
+                        ],
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      padding: EdgeInsets.all(30),
+                      children: products.map(
+                        (product) => InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductDetailPage(product: product),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                product['gambar1'] ?? 'assets/images/kopi3.jpg',
-                                width: double.infinity,
-                                height: 100,
-                                fit: BoxFit.cover,
-                                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                                  return Image.asset(
-                                    'assets/images/kopi3.jpg',
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 5),
+                                  color: Theme.of(context).primaryColor.withOpacity(.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                )
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    product['gambar1'] ?? 'assets/images/arabicaa.jpg',
                                     width: double.infinity,
                                     height: 100,
                                     fit: BoxFit.cover,
-                                  );
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    product['varietas_kopi'],
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                      return Image.asset(
+                                        'assets/images/kopi3.jpg',
+                                        width: double.infinity,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
                                   ),
-                                  SizedBox(height: 0),
-                                  Text(
-                                    product['metode_pengolahan'],
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.grey,
-                                    ),
+                                ),
+                                SizedBox(height: 5),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        product['varietas_kopi'],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 0),
+                                      Text(
+                                        product['metode_pengolahan'],
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ).toList(),
                     ),
-                  ).toList(),
+                  ],
                 ),
-              ],
-            ),
     );
   }
 }

@@ -35,7 +35,7 @@ class _ReportPageState extends State<ReportPage> {
       );
 
       if (response.statusCode == 200) {
-        print('Response: ${response.body}');
+       // print('Response: ${response.body}');
         List<dynamic> jsonResponse = json.decode(response.body);
         if (jsonResponse is List && jsonResponse.isNotEmpty && jsonResponse[0] is List) {
           List<dynamic> innerList = jsonResponse[0];
@@ -79,6 +79,12 @@ class _ReportPageState extends State<ReportPage> {
           ),
         ),
         centerTitle: true,
+         leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.green),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: data.isEmpty
           ? Center(

@@ -26,6 +26,12 @@ class PenjadwalanPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+         leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.green),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
