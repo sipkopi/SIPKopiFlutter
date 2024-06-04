@@ -5,6 +5,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'dart:io';
+import 'package:login_signup/screens/qrcode/scan.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class QrcodePage extends StatefulWidget {
@@ -79,6 +80,22 @@ class _QrcodePageState extends State<QrcodePage> {
               },
               child: Text(
                 'SIMPAN',
+                style: TextStyle(color: Colors.white, fontSize: 15),
+              ),
+            ),
+            SizedBox(height: 30),
+                ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+              ),
+              onPressed: () async {
+                 Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Scan()),
+          );
+              },
+              child: Text(
+                'Scan',
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),
             ),

@@ -10,7 +10,7 @@ class CuacaPage extends StatefulWidget {
 }
 
 class _CuacaPageState extends State<CuacaPage> {
-  // Replace 'your_api_key_here' with your actual API key
+  
   final WeatherFactory _wf = WeatherFactory('9ccea4a0af9428b90f094836e41470cd');
 
   Weather? _weather;
@@ -18,12 +18,13 @@ class _CuacaPageState extends State<CuacaPage> {
   @override
   void initState() {
     super.initState();
+    
     _wf.currentWeatherByCityName("Bondowoso").then((w) {
       setState(() {
         _weather = w;
       });
     }).catchError((error) {
-      // Handle API exceptions here
+      
       print('Error: ${error.toString()}');
     });
   }
@@ -32,6 +33,7 @@ class _CuacaPageState extends State<CuacaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildUI(),
+      
     );
   }
 

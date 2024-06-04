@@ -4,6 +4,7 @@ import 'package:login_signup/screens/home/dashboard.dart';
 import 'package:login_signup/screens/pencatatan/pencatatan.dart';
 import 'package:login_signup/screens/profile/profile.dart';
 import 'package:login_signup/screens/qrcode/qrcode.dart';
+import 'package:login_signup/screens/qrcode/scan.dart';
 import 'package:login_signup/screens/product/product.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     DashboardPage(),
-    ProductPage(),
+    Scan(),
     PencatatanPage(),
     QrcodePage(),
     ProfilePage(),
