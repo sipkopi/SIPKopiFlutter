@@ -36,7 +36,7 @@ class HarvestPricePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 8),
             Row(
               children: [
                 Icon(Icons.scale, color: Colors.green),
@@ -47,18 +47,18 @@ class HarvestPricePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 2),
+            SizedBox(height: 8),
             Row(
               children: [
                 Icon(Icons.monetization_on, color: Colors.green),
                 SizedBox(width: 8),
                 Text(
-                  'Harga Saat ini: $hargaSaatIni',
+                  'Harga Saat ini: Rp$hargaSaatIni',
                   style: GoogleFonts.roboto(fontSize: 16),
                 ),
               ],
             ),
-            SizedBox(height: 4),
+            SizedBox(height: 8),
             Row(
               children: [
                 Icon(Icons.info_outline, color: Colors.green),

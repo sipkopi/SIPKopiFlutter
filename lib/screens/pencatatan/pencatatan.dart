@@ -3,6 +3,7 @@ import 'package:login_signup/widgets/card_widget.dart';
 import 'package:login_signup/screens/pencatatan/pembibitan/pembibitan.dart';
 import 'package:login_signup/screens/pencatatan/perawatan/perawatan.dart';
 import 'package:login_signup/screens/pencatatan/panen/panen.dart';
+import 'package:login_signup/screens/product/product.dart';
 
 class PencatatanPage extends StatefulWidget {
   @override
@@ -72,14 +73,14 @@ class _PencatatanPageState extends State<PencatatanPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PanenPage()),
+                    MaterialPageRoute(builder: (context) => ProductPage()),
                   );
                 },
                 child: SizedBox(
                   width: 350,
                   height: 130,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30), // Set the border radius here
+                    borderRadius: BorderRadius.circular(30), 
                     child: CardWidget(
                       image: AssetImage('assets/images/panen.png'),
                     ),

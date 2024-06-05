@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_signup/screens/pencatatan/panen/panen_add.dart';
-import 'package:login_signup/services/panen_api.dart'; // Import PanenApi
+import 'package:login_signup/services/panen_api.dart'; 
 
 class PanenPage extends StatefulWidget {
   @override
@@ -89,14 +89,14 @@ class _PanenPageState extends State<PanenPage> {
                             elevation: 4.0,
                             child: ListTile(
                               leading: Icon(
-                                Icons.local_florist, // Icon untuk varietas kopi
-                                color: Colors.green, // Warna ikon
+                                Icons.local_florist, 
+                                color: Colors.green, 
                               ),
                               title: Text(
                                 'Kode Kopi: $kodeKopi',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: 'Roboto', // Gunakan font Roboto
+                                  fontFamily: 'Roboto', 
                                 ),
                               ),
                               subtitle: Column(
@@ -106,14 +106,14 @@ class _PanenPageState extends State<PanenPage> {
                                     children: [
                                       Icon(
                                         Icons.coffee,
-                                        color: Colors.green, // Warna ikon
-                                        size: 16.0, // Ukuran ikon
+                                        color: Colors.green, 
+                                        size: 16.0, 
                                       ),
                                       SizedBox(width: 8.0),
                                       Text(
                                         'Varietas Kopi: $varietasKopi',
                                         style: TextStyle(
-                                          fontFamily: 'Roboto', // Gunakan font Roboto
+                                          fontFamily: 'Roboto', 
                                           color: Colors.grey[800],
                                         ),
                                       ),
@@ -122,15 +122,15 @@ class _PanenPageState extends State<PanenPage> {
                                   Row(
                                     children: [
                                       Icon(
-                                        Icons.settings, // Icon untuk metode pengolahan
-                                        color: Colors.green, // Warna ikon
-                                        size: 16.0, // Ukuran ikon
+                                        Icons.settings, 
+                                        color: Colors.green, 
+                                        size: 16.0, 
                                       ),
                                       SizedBox(width: 8.0),
                                       Text(
                                         'Metode Pengolahan: $metodePengolahan',
                                         style: TextStyle(
-                                          fontFamily: 'Roboto', // Gunakan font Roboto
+                                          fontFamily: 'Roboto', 
                                           color: Colors.grey[800],
                                         ),
                                       ),
@@ -139,15 +139,15 @@ class _PanenPageState extends State<PanenPage> {
                                   Row(
                                     children: [
                                       Icon(
-                                        Icons.calendar_today, // Icon untuk tanggal roasting
-                                        color: Colors.green, // Warna ikon
-                                        size: 16.0, // Ukuran ikon
+                                        Icons.calendar_today, 
+                                        color: Colors.green, 
+                                        size: 16.0, 
                                       ),
                                       SizedBox(width: 8.0),
                                       Text(
                                         'Tanggal Roasting: $tglRoasting',
                                         style: TextStyle(
-                                          fontFamily: 'Roboto', // Gunakan font Roboto
+                                          fontFamily: 'Roboto', 
                                           color: Colors.grey[800],
                                         ),
                                       ),
@@ -156,15 +156,15 @@ class _PanenPageState extends State<PanenPage> {
                                   Row(
                                     children: [
                                       Icon(
-                                        Icons.inventory, // Icon untuk stok
-                                        color: Colors.green, // Warna ikon
-                                        size: 16.0, // Ukuran ikon
+                                        Icons.inventory, 
+                                        color: Colors.green, 
+                                        size: 16.0, 
                                       ),
                                       SizedBox(width: 8.0),
                                       Text(
                                         'Stok: $stok',
                                         style: TextStyle(
-                                          fontFamily: 'Roboto', // Gunakan font Roboto
+                                          fontFamily: 'Roboto', 
                                           color: Colors.grey[800],
                                         ),
                                       ),
@@ -173,7 +173,7 @@ class _PanenPageState extends State<PanenPage> {
                                 ],
                               ),
                               onTap: () {
-                                // Tambahkan logika navigasi jika diperlukan
+                               
                               },
                             ),
                           ),

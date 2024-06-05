@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_signup/screens/product/productdetailpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:login_signup/screens/pencatatan/panen/panen_add.dart';
 
 class ProductPage extends StatefulWidget {
   @override
@@ -11,13 +12,16 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   List<Map<String, dynamic>> products = [];
+  List<Map<String, dynamic>> filteredProducts = [];
   bool isLoading = true;
   String errorMessage = '';
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     loadProducts();
+    _searchController.addListener(_filterProducts);
   }
 
   Future<String> _loadUserName() async {
@@ -38,6 +42,7 @@ class _ProductPageState extends State<ProductPage> {
         if (jsonResponse is List && jsonResponse.isNotEmpty && jsonResponse[0] is List) {
           setState(() {
             products = List<Map<String, dynamic>>.from(jsonResponse[0]);
+            filteredProducts = products;
             isLoading = false;
           });
         } else {
@@ -52,6 +57,24 @@ class _ProductPageState extends State<ProductPage> {
         isLoading = false;
       });
     }
+  }
+
+  void _filterProducts() {
+    String query = _searchController.text.toLowerCase();
+    setState(() {
+      filteredProducts = products.where((product) {
+        String varietasKopi = product['varietas_kopi'].toLowerCase();
+        String metodePengolahan = product['metode_pengolahan'].toLowerCase();
+        return varietasKopi.contains(query) || metodePengolahan.contains(query);
+      }).toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_filterProducts);
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -92,9 +115,10 @@ class _ProductPageState extends State<ProductPage> {
                       child: Row(
                         children: [
                           Icon(Icons.search),
-                          SizedBox(width: 10),
+                          SizedBox(width: 8),
                           Expanded(
                             child: TextField(
+                              controller: _searchController,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Search for..",
@@ -114,7 +138,7 @@ class _ProductPageState extends State<ProductPage> {
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
                       padding: EdgeInsets.all(30),
-                      children: products.map(
+                      children: filteredProducts.map(
                         (product) => InkWell(
                           onTap: () {
                             Navigator.push(
@@ -159,14 +183,14 @@ class _ProductPageState extends State<ProductPage> {
                                 ),
                                 SizedBox(height: 5),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  padding: EdgeInsets.symmetric(horizontal: 2),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         product['varietas_kopi'],
                                         style: TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -174,7 +198,7 @@ class _ProductPageState extends State<ProductPage> {
                                       Text(
                                         product['metode_pengolahan'],
                                         style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 12,
                                           color: Colors.grey,
                                         ),
                                       ),
@@ -189,6 +213,16 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ],
                 ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PanenAdd()),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

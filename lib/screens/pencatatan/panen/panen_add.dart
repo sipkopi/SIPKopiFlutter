@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_signup/screens/product/product.dart';
 import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -176,11 +177,13 @@ class _PanenAddState extends State<PanenAdd> {
               CustomTextField(
                 labelText: 'Berat',
                 controller: beratController,
+                isTextInput: false,
               ),
               SizedBox(height: 15),
               CustomTextField(
                 labelText: 'Stok',
                 controller: stokController,
+                isTextInput: false,
               ),
               SizedBox(height: 15),
               CustomTextField(
@@ -249,7 +252,7 @@ class _PanenAddState extends State<PanenAdd> {
       );
        Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => PanenPage()), 
+        MaterialPageRoute(builder: (context) => ProductPage()), 
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
