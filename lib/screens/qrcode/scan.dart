@@ -93,15 +93,15 @@ class _ScanState extends State<Scan> {
                     const Align(
                       alignment: Alignment.topCenter,
                       child: Text(
-                        "SCAN TANAMAN",
+                        "Scan Daun",
                         style: TextStyle(
-                            fontFamily: "Poppins",
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                            color: Colors.green,
+                            fontSize: 22,
+            fontWeight: FontWeight.w600,),
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Align(
                       alignment: Alignment.center,
@@ -122,10 +122,6 @@ class _ScanState extends State<Scan> {
                           pathDir = null;
                           pathDir = await takePicture();
                           log("hasil : ${pathDir}");
-                          // (pathDir != null)
-                          //     ? log("iki lo : ${predict(pathDir!)}")
-                          //     : log("kosong");
-                          // ignore: use_build_context_synchronously
                           showModalBottomSheet(
                               context: context,
                               builder: ((context) {
@@ -186,7 +182,7 @@ class _ScanState extends State<Scan> {
                                                     alignment:
                                                         Alignment.topLeft,
                                                     child: Text(
-                                                      "Confidence : ${snap.data[0]['confidence']}",
+                                                      "Akurasi : ${snap.data[0]['confidence']}",
                                                       style: const TextStyle(
                                                           fontFamily: "Poppins",
                                                           fontSize: 18,
@@ -202,7 +198,7 @@ class _ScanState extends State<Scan> {
                                                     alignment:
                                                         Alignment.topLeft,
                                                     child: Text(
-                                                      "Treatment : ",
+                                                      "Perawatan : ",
                                                       style: TextStyle(
                                                           fontFamily: "Poppins",
                                                           fontSize: 18,
@@ -235,18 +231,19 @@ class _ScanState extends State<Scan> {
                         }
                       },
                       child: Container(
-                        height: 80,
+                        height: 60,
                         width: MediaQuery.of(context).size.width * 0.9,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(126, 217, 87, 1)),
+                            color: Colors.green),
                         child: const Center(
                           child: Text(
                             "PERIKSA",
                             style: TextStyle(
                                 fontFamily: "Poppins",
-                                fontSize: 20,
-                                color: Colors.white),
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

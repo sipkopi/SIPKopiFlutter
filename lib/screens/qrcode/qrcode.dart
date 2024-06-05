@@ -83,22 +83,7 @@ class _QrcodePageState extends State<QrcodePage> {
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),
             ),
-            SizedBox(height: 30),
-                ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.green,
-              ),
-              onPressed: () async {
-                 Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Scan()),
-          );
-              },
-              child: Text(
-                'Scan',
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              ),
-            ),
+          
           ],
         ),
       ),
