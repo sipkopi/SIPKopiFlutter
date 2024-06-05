@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         animationDuration: const Duration(milliseconds: 200),
         items: const <Widget>[
           Icon(Icons.home, size: 26, color: Colors.white),
-          Icon(Icons.production_quantity_limits, size: 26, color: Colors.white),
+          Icon(Icons.local_florist, size: 26, color: Colors.white),
           Icon(Icons.note_alt, size: 26, color: Colors.white),
           Icon(Icons.qr_code, size: 26, color: Colors.white),
       
