@@ -60,7 +60,7 @@ dependencies:
   path_provider: ^2.1.1
   tflite_v2: ^1.0.0
   camera: ^0.10.5+5
-
+  geolocator : ^9.0.2
 
 
 dev_dependencies:

@@ -109,7 +109,7 @@ class _HargaKopiState extends State<HargaKopi> {
                                 satuan: satuan,
                                 sumber: sumber,
                               ),
-                              if (index < data.length - 1) SizedBox(height: 5), // Persempit jarak antar card
+                              if (index < data.length - 1) SizedBox(height: 5), 
                             ],
                           );
                         },

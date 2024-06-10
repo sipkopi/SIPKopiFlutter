@@ -14,6 +14,7 @@ class ApiService { //tambah kopi
     required String tglExp,
     required String berat,
     required String stok,
+    required String harga,
     required String deskripsi,
     required File gambar1,
   }) async {
@@ -27,6 +28,7 @@ class ApiService { //tambah kopi
       request.fields['tgl_exp'] = tglExp;
       request.fields['berat'] = berat;
       request.fields['stok'] = stok;
+      request.fields['harga'] = harga;
       request.fields['deskripsi'] = deskripsi;
 
       request.files.add(await http.MultipartFile.fromPath('gambar1', gambar1.path));

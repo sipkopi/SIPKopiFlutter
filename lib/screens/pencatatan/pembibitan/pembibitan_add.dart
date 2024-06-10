@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_signup/widgets/custom_textfield.dart';
 import 'package:login_signup/widgets/custom_datepicker.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PembibitanAdd extends StatefulWidget {
   @override
@@ -25,6 +27,7 @@ class _PembibitanAddState extends State<PembibitanAdd> {
   void initState() {
     super.initState();
     _loadUserName();
+    _getCurrentLocation();
   }
 
   Future<void> _loadUserName() async {
@@ -33,6 +36,61 @@ class _PembibitanAddState extends State<PembibitanAdd> {
     setState(() {
       pemilikController.text = userName;
     });
+  }
+
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Location services are disabled.'),
+        ),
+      );
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Location permissions are denied'),
+          ),
+        );
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              'Location permissions are permanently denied, we cannot request permissions.'),
+        ),
+      );
+      return;
+    }
+
+    Position position = await Geolocator.getCurrentPosition();
+
+    setState(() {
+      longitudeController.text = position.longitude.toString();
+      latitudeController.text = position.latitude.toString();
+      ketinggianController.text = position.altitude.round().toString(); // Menghilangkan angka desimal
+    });
+  }
+
+  void _launchMaps() async {
+    final String googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=${latitudeController.text},${longitudeController.text}';
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw 'Could not launch $googleMapsUrl';
+    }
   }
 
   @override
@@ -47,7 +105,7 @@ class _PembibitanAddState extends State<PembibitanAdd> {
             fontWeight: FontWeight.w600,
           ),
         ),
-       centerTitle: true,
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.green),
           onPressed: () {
@@ -70,6 +128,7 @@ class _PembibitanAddState extends State<PembibitanAdd> {
               CustomTextField(
                 labelText: 'Pemilik Lahan',
                 controller: pemilikController,
+                readOnly: true,
               ),
               SizedBox(height: 15),
               CustomTextField(
@@ -116,6 +175,8 @@ class _PembibitanAddState extends State<PembibitanAdd> {
                     child: CustomTextField(
                       labelText: 'Longitude',
                       controller: longitudeController,
+                      readOnly: true,
+                      
                     ),
                   ),
                   SizedBox(width: 10),
@@ -123,9 +184,18 @@ class _PembibitanAddState extends State<PembibitanAdd> {
                     child: CustomTextField(
                       labelText: 'Latitude',
                       controller: latitudeController,
+                      readOnly: true,
                     ),
                   ),
                 ],
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                // style: ElevatedButton.styleFrom(
+                //   primary: Colors.green,
+                // ),
+                onPressed: _launchMaps,
+                child: Text('Tampilkan Lokasi'),
               ),
               SizedBox(height: 16.0),
               ElevatedButton(

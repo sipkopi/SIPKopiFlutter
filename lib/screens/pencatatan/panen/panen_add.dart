@@ -23,6 +23,7 @@ class _PanenAddState extends State<PanenAdd> {
   final TextEditingController tanggalRoastingController = TextEditingController();
   final TextEditingController tanggalExpiredController = TextEditingController();
   final TextEditingController stokController = TextEditingController();
+  final TextEditingController hargaController = TextEditingController();
   final TextEditingController deskripsiController = TextEditingController();
   File? _image;
 
@@ -173,6 +174,7 @@ class _PanenAddState extends State<PanenAdd> {
                 labelText: 'Tanggal Expired',
                 controller: tanggalExpiredController,
               ),
+            
               SizedBox(height: 15),
               CustomTextField(
                 labelText: 'Berat',
@@ -183,6 +185,12 @@ class _PanenAddState extends State<PanenAdd> {
               CustomTextField(
                 labelText: 'Stok',
                 controller: stokController,
+                isTextInput: false,
+              ),
+                 SizedBox(height: 15),
+              CustomTextField(
+                labelText: 'Harga',
+                controller: hargaController,
                 isTextInput: false,
               ),
               SizedBox(height: 15),
@@ -226,6 +234,7 @@ class _PanenAddState extends State<PanenAdd> {
         deskripsiController.text.isNotEmpty &&
         tanggalExpiredController.text.isNotEmpty &&
         stokController.text.isNotEmpty &&
+        hargaController.text.isEmpty &&
         _image != null;
   }
 
@@ -240,6 +249,7 @@ class _PanenAddState extends State<PanenAdd> {
       tglExp: tanggalExpiredController.text,
       berat: beratController.text,
       stok: stokController.text,
+      harga: hargaController.text,
       deskripsi: deskripsiController.text,
       gambar1: _image!,
     );
