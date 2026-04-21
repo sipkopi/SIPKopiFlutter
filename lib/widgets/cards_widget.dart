@@ -36,7 +36,7 @@ class CardsWidget extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: onPressed, // Gunakan onPressed yang diterima dari luar
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                   ),
                   child: Text(
                     text,

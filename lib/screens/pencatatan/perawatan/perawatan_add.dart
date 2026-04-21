@@ -177,7 +177,7 @@ class _PerawatanAddState extends State<PerawatanAdd> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  backgroundColor: Colors.green,
                 ),
                 onPressed: () {
                   if (_validateInputs()) {

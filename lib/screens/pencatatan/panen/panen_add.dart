@@ -201,7 +201,7 @@ class _PanenAddState extends State<PanenAdd> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  backgroundColor: Colors.green,
                 ),
                 onPressed: () {
                   // Lakukan aksi saat tombol ditekan

@@ -289,14 +289,24 @@ class _SignInScreenState extends State<SignInScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formSignInKey.currentState!.validate()) {
-                              _login();
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                              // anggap user sudah login
+                              await prefs.setBool('isLoggedIn', true);
+                              await prefs.setString('userName', 'Guest User');
+                              await prefs.setString('userEmail', 'guest@sipkopi.com');
+
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => HomePage()),
+                              );
                             }
                           },
                           child: const Text('Sign In'),
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
+                            backgroundColor: Colors.green,
                           ),
                         ),
                       ),

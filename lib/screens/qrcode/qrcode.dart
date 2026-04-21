@@ -73,7 +73,7 @@ class _QrcodePageState extends State<QrcodePage> {
             SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.green,
+                backgroundColor: Colors.green,
               ),
               onPressed: () async {
                 await _saveScreenshot();

@@ -60,7 +60,7 @@ dependencies:
   path_provider: ^2.1.1
   tflite_v2: ^1.0.0
   camera: ^0.10.5+5
-  geolocator : ^9.0.2
+  geolocator: ^8.2.1
 
 
 dev_dependencies:
@@ -89,6 +89,7 @@ flutter:
   assets:
     - assets/images/
     - assets/model/model.tflite
+    - assets/model/resnet50_coffee_model.tflite
     - assets/model/labels.txt
     - assets/virus.png
     # - assets/images/bg2.png

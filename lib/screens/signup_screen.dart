@@ -337,7 +337,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.green, 
+                            backgroundColor: Colors.green, 
                         ),
                           onPressed: () {
                             if (_formSignupKey.currentState!.validate() &&

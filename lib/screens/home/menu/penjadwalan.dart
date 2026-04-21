@@ -62,7 +62,7 @@ class PenjadwalanPage extends StatelessWidget {
               SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  backgroundColor: Colors.green,
                 ),
                 onPressed: () async {
                   if (_validateInputs()) {

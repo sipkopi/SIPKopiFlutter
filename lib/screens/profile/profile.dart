@@ -207,7 +207,7 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green, 
+                  backgroundColor: Colors.green, 
                 ),
                 onPressed: () => _logout(context),
                 child: Text('Log out'),
