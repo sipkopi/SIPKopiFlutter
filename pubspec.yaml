@@ -89,7 +89,7 @@ flutter:
   assets:
     - assets/images/
     - assets/model/model.tflite
-    - assets/model/resnet50_coffee_model.tflite
+    - assets/model/mobilenetv2_model.tflite
     - assets/model/labels.txt
     - assets/virus.png
     # - assets/images/bg2.png

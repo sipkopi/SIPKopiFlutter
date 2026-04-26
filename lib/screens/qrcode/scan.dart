@@ -30,7 +30,7 @@ class _ScanState extends State<Scan> {
 
   Future<String?> loadModel() async {
     String? res = await Tflite.loadModel(
-        model: "assets/model/model.tflite",
+        model: "assets/model/mobilenetv2_model.tflite",
         labels: "assets/model/labels.txt",
         numThreads: 1,
         isAsset: true,

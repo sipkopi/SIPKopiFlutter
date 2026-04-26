@@ -1,3 +1,0 @@
-nodisease
-phoma
-rust
